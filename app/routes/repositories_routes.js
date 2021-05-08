@@ -1,3 +1,4 @@
+const { json } = require('body-parser');
 const { request } = require('express');
 
 const https = require("https");
@@ -20,7 +21,17 @@ module.exports = function(app){
                 });
 
                 resp.on("end", () => {
-                    res.send(JSON.parse(data));
+                    form = JSON.parse(data);
+                    formatted = form.map(elem => {
+                        let obj = {
+                            profilePic: elem.owner.avatar_url,
+                            name: elem.name,
+                            description: elem.description
+                        };
+                        return obj;
+                    });
+                    console.log(formatted);
+                    res.send(formatted);
                 });
 
                 resp.on("error", err => {
