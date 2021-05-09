@@ -17,7 +17,7 @@ const options = {
  * Receives the response from the github API as a parameter
  * Returns a JSON formatted in a way to fit the items of a dynamic content block in the blip builder
  */
-function formatJSON(form) {
+const formatJSON = (form) => {
   formatted = form.map((elem) => {
     let obj = {
       header: {
